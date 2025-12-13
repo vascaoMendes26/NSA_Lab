@@ -18,12 +18,14 @@
 \usepackage{cite} % Citations, like [1 - 3]
 \usepackage{color} % Text coloring
 \usepackage{fancyhdr} % Head note and footnote
+\usepackage{booktabs} % Para linhas horizontais mais bonitas (\toprule, \bottomrule)
+\usepackage{geometry} % Opcional: para ajustar margens se necessário
     \pagestyle{fancy}
     \fancyhf{}
     \fancyhead[L]{
         \includegraphics[scale = 0.45]{Images/NovaFctHor.png}
     } % Left of Head note
-    \fancyhead[R]{\footnotesize Comunicações sem Fios} % Right of Head note
+    \fancyhead[R]{\footnotesize Nanocircuits and Analog Systems} % Right of Head note
     \fancyfoot[R]{\thepage  } % Center of Footnote
     %\fancyfoot[R]{\footnotesize Degree} % Right of Footnote
     \renewcommand{\footrulewidth}{0.4pt} % Footnote rule
@@ -187,6 +189,11 @@
 \newpage
 
 \subfile{Sections/Introdução.tex}
+\subfile{Sections/AnaliseTeorica.tex}
+\subfile{Sections/Dimensionamento.tex}
+\subfile{Sections/Simualção.tex}
+
+
 
 %\newpage
 %\bibliography{references}

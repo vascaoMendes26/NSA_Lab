@@ -1,0 +1,204 @@
+\section{Simulação}
+
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/BiasCircuit.png}
+        \caption{Bias Circuit}
+        \label{fig:bias}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/CFC_OTA.png}
+        \caption{CFC OTA}
+        \label{fig:ota}
+    \end{subfigure}
+    
+    \caption{Esquemas dos circuitos: (a) Circuito de polarização e (b) OTA.}
+    \label{fig:circuitos_completos}
+\end{figure}
+
+\textcolor{red}{FALTA MUDAR PARA VALORES  CERTO DEPOIS DO LAB!!!!!!!!!!}
+
+\begin{table}[h!]
+    \centering
+    \caption{Transistors final dimensions}
+    \label{tab:transistores_dimensoes}
+    \vspace{0.2cm} % Espaço para não ficar colado ao título
+    
+    % Aumentar o espaçamento entre linhas para ficar legível (opcional)
+    \renewcommand{\arraystretch}{1.3}
+
+    \begin{tabular}{cccc}
+        \toprule[1.2pt]
+        \textbf{Transistor} & \textbf{Width (W)} & \textbf{Length (L)} & \textbf{Fingers} \\
+        \midrule
+        
+        $M_{B1}, \, M_{B2}, \, M_{B4}$ & 4.54\,$\mu$m & 800\,nm & 1 \\
+        \hline
+        $M_{B3}, \, M_{B7}$ & 6.35\,$\mu$m & 800\,nm & 1 \\
+        \hline
+        $M_{B5}$ & \textcolor{red}{99999999\,nm} & 800\,nm & 1 \\
+        \hline
+        $M_{B6}$ & \textcolor{red}{9999999\,nm} & 600\,nm & 1 \\
+        \hline
+        $M_{1a}, \, M_{2a}, \, M_{1b}, \, M_{2b}$ & 9.335\,$\mu$m & 400\,nm & \textcolor{red}{12} \\
+        \hline
+        $M_{3}, \, M_{4}$ & 7.745\,$\mu$m & 200\,nm & 8 \\
+        \hline
+        $M_{5}, \, M_{6}$ & 8.165\,$\mu$m & 800\,nm & 4 \\
+        \hline
+        $M_{7}, \, M_{8}$ & \textcolor{red}{9.915\,$\mu$m} & 500\,nm & \textcolor{red}{6} \\
+        \hline
+        $M_{9a}, \, M_{9b}$ & \textcolor{red}{7.5\,$\mu$m} & 180\,nm & \textcolor{red}{4} \\
+        \hline
+        $M_{10}, \, M_{11}$ & 8.52\,$\mu$m & 600\,nm & 10 \\
+       
+        \bottomrule[1.2pt]
+    \end{tabular}
+\end{table}
+
+\textcolor{red}{Circuito Completo com bobine e $C_L$}
+
+
+\subsection{Simulação DC}
+
+\textcolor{red}{Foto da esquemática com os valores DC do circuito Bias e OTA}
+
+\textcolor{red}{FALTA MUDAR PARA VALORES  CERTO DEPOIS DO LAB!!!!!!!!!!}
+
+
+% --- Tabela VIII: Bias Circuit ---
+\begin{table}[h!]
+    \centering
+    \caption{DC simulation results biasing circuit}
+    \label{tab:dc_bias}
+    \vspace{0.2cm}
+    \renewcommand{\arraystretch}{1.3} % Espaçamento para ficar arejado
+
+    \begin{tabular}{ccc}
+        \toprule[1.2pt]
+        \textbf{Transistor} & \boldmath{$V_{DSat}$} & \boldmath{$I_{B}$} \\
+        \midrule
+        
+        $M_{B1}$ & $-138.1 \, \text{mV}$ & $-15 \, \mu\text{A}$ \\
+        \hline
+        $M_{B2}$ & $-138.2 \, \text{mV}$ & $-17.18 \, \mu\text{A}$ \\
+        \hline
+        $M_{B3}$ & $120.9 \, \text{mV}$ & $17.18 \, \mu\text{A}$ \\
+        \hline
+        $M_{B4}$ & $-138.1 \, \text{mV}$ & $-15.35 \, \mu\text{A}$ \\
+        \hline
+        $M_{B5}$ & $341.7 \, \text{mV}$ & $15.35 \, \mu\text{A}$ \\
+        \hline
+        $M_{B6}$ & $-435.2 \, \text{mV}$ & $-17.12 \, \mu\text{A}$ \\
+        \hline
+        $M_{B7}$ & $120.8 \, \text{mV}$ & $17.12 \, \mu\text{A}$ \\
+        
+        \bottomrule[1.2pt]
+    \end{tabular}
+\end{table}
+
+% --- Tabela IX: Main Circuit (CFC OTA) ---
+\begin{table}[h!]
+    \centering
+    \caption{DC simulation results main circuit}
+    \label{tab:dc_main}
+    \vspace{0.2cm}
+    \renewcommand{\arraystretch}{1.3}
+
+    \begin{tabular}{ccc}
+        \toprule[1.2pt]
+        \textbf{Transistor} & \boldmath{$V_{DSat}$} & \boldmath{$I_{D}$} \\
+        \midrule
+        
+        $M_{1a}$ & $-67.98 \, \text{mV}$ & $-37.8 \, \mu\text{A}$ \\
+        \hline
+        $M_{1b}$ & $-67.98 \, \text{mV}$ & $-37.99 \, \mu\text{A}$ \\
+        \hline
+        $M_{2a}$ & $-67.78 \, \text{mV}$ & $-37.45 \, \mu\text{A}$ \\
+        \hline
+        $M_{2b}$ & $-67.78 \, \text{mV}$ & $-37.55 \, \mu\text{A}$ \\
+        \hline
+        $M_{3}$ & $-66.74 \, \text{mV}$ & \textcolor{red}{$-21.61 \, \mu\text{A}$} \\
+        \hline
+        $M_{4}$ & $-107.1 \, \text{mV}$ & \textcolor{red}{$-20.68 \, \mu\text{A}$} \\
+        \hline
+        $M_{5}$ & $70.61 \, \text{mV}$ & \textcolor{red}{$21.61 \, \mu\text{A}$} \\
+        \hline
+        $M_{6}$ & $68.54 \, \text{mV}$ & \textcolor{red}{$20.68 \, \mu\text{A}$} \\
+        \hline
+        $M_{7}$ & $69.2 \, \text{mV}$ & \textcolor{red}{$59.06 \, \mu\text{A}$} \\
+        \hline
+        $M_{8}$ & $68.97 \, \text{mV}$ & \textcolor{red}{$58.48 \, \mu\text{A}$} \\
+        \hline
+        $M_{9a}$ & $-139 \, \text{mV}$ & $-150.8 \, \mu\text{A}$ \\
+        \hline
+        $M_{9b}$ & $-139 \, \text{mV}$ & $-150.8 \, \mu\text{A}$ \\
+        \hline
+        $M_{10}$ & $-69.86 \, \text{mV}$ & $-20.68 \, \mu\text{A}$ \\
+        \hline
+        $M_{11}$ & $-69.86 \, \text{mV}$ & $-21.61 \, \mu\text{A}$ \\
+        
+        \bottomrule[1.2pt]
+    \end{tabular}
+\end{table}
+
+\subsection{Simulação AC}
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{Images/AC_Sim.png}
+    \caption{Simulação AC}
+    \label{fig:Sim_AC}
+\end{figure}
+
+\textcolor{red}{FALTA MUDAR PARA VALORES  CERTO DEPOIS DO LAB!!!!!!!!!!}
+
+
+\begin{table}[h!]
+    \centering
+    \caption{AC simulation results}
+    \label{tab:ac_results}
+    \vspace{0.2cm}
+    
+    % Espaçamento para ficar igual à imagem
+    \renewcommand{\arraystretch}{1.3}
+
+    \begin{tabular}{cc}
+        \toprule[1.2pt]
+        \textbf{Parameter} & \textbf{Result} \\
+        \midrule
+        
+        DC Gain & $66.8 \, \text{dB}$ \\
+        \hline
+        Gain Bandwidth Product & $105.4 \, \text{MHz}$ \\
+        \hline
+        Phase Margin & $41.41^{\circ}$ \\
+        \hline
+        Output Swing & $763.6 \, \text{mV}$ \\
+        \hline
+        Power Dissipation & $420 \, \mu\text{W}$ \\
+        \hline
+        Excess-Noise Factor & $2.199$ \\
+        \hline
+        Figure of Merit & $502 \, \text{MHz} \cdot \text{pF/mW}$ \\
+        
+        \bottomrule[1.2pt]
+    \end{tabular}
+\end{table}
+
+\subsection{Layout}
+
+
+\subsection{Melhorias no Circuito}
+
+\subsection{Comparação com o Lab6(VER NOME do gajo)}
+
+
+
+
+
+\newpage

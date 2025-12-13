@@ -1,0 +1,50 @@
+\section{Introdução}
+
+Este trabalho tem como objetivo o design, otimização e simulação de um Complementary Folded-Cascode (CFC)
+operational transconductance amplifier (OTA) circuit. O circuito foi desenhado usando a tecnologia TSMC 65nm
+e a simulação foi realzada no software Cadence Virtuoso. Na Figura \ref{fig:Schematic} está apresentado o esquemático do circuito. 
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{Images/Cascode_Schematich.png}
+    \caption{Single-ended CFC OTA Schematic}
+    \label{fig:Schematic}
+\end{figure}
+
+
+
+\begin{table}[h!]
+    \centering
+    % --- ESTA LINHA É QUE FAZ APARECER NO ÍNDICE ---
+    \caption{Objetivos e Restrições do projeto} 
+    \label{tab:specs} 
+    % -----------------------------------------------
+    \vspace{0.2cm}
+
+    \begin{tabular}{cc}
+        \toprule[1.2pt] 
+        \textbf{Objetivo/Restrições} & \textbf{Descrição} \\ 
+        \midrule 
+        
+        DC Gain & $A_{min} \approx 62 \, \text{dB}$ \\ 
+        \hline
+        Gain Bandwidth Product ($C_L = 8 \, \text{pF}$) & $GBW \approx 50 \, \text{MHz}$ \\ 
+        \hline
+        Second Pole Frequency & $f_{p2} \gg 200 \, \text{MHz}$ \\ 
+        \hline
+        Third Pole Frequency & $f_{p3} \gg 500 \, \text{MHz}$ \\ 
+        \hline
+        Output Swing ($V_{margin} = 80 \, \text{mV}$) & $OS \geq 0.5 V_{p.p}$ \\ 
+        \hline
+        Channel Lengths & $0.18 \, \mu\text{m} \leq L's \leq 1 \, \mu\text{m}$ \\ 
+        \hline
+        Moderate Inversion & $50 \, \text{mV} \leq V_{DSat} \leq 150 \, \text{mV}$ \\ 
+        \hline
+        Excess-Noise Factor & $\Gamma \leq 3.5$ \\ 
+        \hline
+        Device Areas & $W \times L \geq 0.5 \, \mu\text{m}^2$ \\
+        \bottomrule[1.5pt] 
+    \end{tabular}
+\end{table}
+
+\newpage
