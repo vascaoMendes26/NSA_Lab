@@ -1,3 +1,81 @@
-\section{Analise Teórica}
+\section{Análise Teórica}
+
+Nesta secção, vão ser mostradas todas as etapas da análise teórica para o circuito Complementary Folded-Cascode (CFC)
+operational transconductance amplifier (OTA). O objetivo com esta análise é determinar os valores dos diferentes parâmetros, 
+as respetivas demonstrações para efeitos de otimização, conseguindo assim cumprir os objetivos que foram definidos na tabela \ref{tab:specs}.
+
+Para analisar teóricamente o CFC OTA, usámos como recurso uma montagem que já nos era conhecida o convencional amplificador Folded Cascode, mostrado
+na Figura \ref{fig:Cascode}, o CFC parte da mesma topologia, mas tem algumas modificações levando a grandes melhorias.
+
+\textcolor{red}{Explicaçãozinha sobre as melhorias do CFC para o normal}
+
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=10cm]{Images/Fcascode.png}
+    \caption{Amplificador Folded Cascode}
+    \label{fig:Cascode}
+\end{figure}
+
+Ao olharmos para o circuito e como foi estudado este é diferencial, portanto podemos apenas estudar metade do circuito,
+devido há sua simetria, o circuito é possível ser visto na Figura \ref{fig:Circ_Simp}.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{Images/Circ_Analisado_Teorica.png}
+    \caption{CFC OTA simplificado}
+    \label{fig:Circ_Simp}
+\end{figure}
+
+Na Figura \ref{fig:SimplificadoMaximo} está representado o circuito simplificado, este que foi escolhido devido a ter 
+o nó de saída, ficando mais simples de retirar os parâmetros e de analisar o circuito. 
+Nas subsecções abaixo constaram as explicações de como foram retiradas as expressões e os valores que foram meencionados ao longo 
+do relatório.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{Images/Simplificadao.png}
+    \caption{Circuito Simplificado}
+    \label{fig:Circ_Simp}
+\end{figure}
+
+
+\subsection{Ganho DC}
+
+Tal como foi estudado o ganho DC $A_v$ é obtido pelo produto da transcondutância de curto circuito $G_M$ e
+a resistência de saída $R_{out}$.
+
+\begin{equation*}
+    A_v = G_M \cdot r_{out} \,\text{[V/V]}
+\end{equation*}
+
+
+\begin{align}
+    Gm = -(g_{m2a} + g_{m2b})
+\end{align}
+
+\begin{align}
+    R_{out} = r_{op} // r_{on} = \frac{1}{g_{op} + g_{on}}
+\end{align}
+
+Where $g_{op}$ and $g_{op}$ are given by:
+
+\begin{align}
+    r_{op} = \frac{1}{g_{op} + g_{on}}
+\end{align}
+
+
+
+\vspace{\baselineskip}
+\begin{align}
+A_v = \frac{
+    \big(g_{m4P} \cdot g_{m6N}\big) \big( BE \cdot g_{m2aN} + BE \cdot g_{m2bP} \big)
+}{
+    BE \cdot g_{m6N} \cdot g_{ds4P} \cdot \big( g_{ds11P} + g_{ds2aN} \big)
+    + BE \cdot g_{m4P} \cdot g_{ds6N} \cdot \big( g_{ds2bP} + g_{ds8N} \big)
+}
+\end{align}
+
+ 
 
 \newpage
