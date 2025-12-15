@@ -18,7 +18,7 @@ na Figura \ref{fig:Cascode}, o CFC parte da mesma topologia, mas tem algumas mod
 \end{figure}
 
 Ao olharmos para o circuito e como foi estudado este é diferencial, portanto podemos apenas estudar metade do circuito,
-devido há sua simetria, o circuito é possível ser visto na Figura \ref{fig:Circ_Simp}.
+devido à sua simetria, o circuito é possível ser visto na Figura \ref{fig:Circ_Simp}.
 
 \begin{figure}[htp]
     \centering
@@ -45,37 +45,207 @@ do relatório.
 Tal como foi estudado o ganho DC $A_v$ é obtido pelo produto da transcondutância de curto circuito $G_M$ e
 a resistência de saída $R_{out}$.
 
-\begin{equation*}
+\begin{align}
     A_v = G_M \cdot r_{out} \,\text{[V/V]}
-\end{equation*}
+    \label{eq:ganho1}
+\end{align}
 
+Os valores de $G_M$ e $R_{out}$ podem ser obtidos pela análise 
+do modelo em pequenos sinais do circuito simplificado da Figura \ref{fig:Circ_Simp}.
+No entanto, para efeitos de simplificação, os valores para $G_M$ e $R_{out}$ foram 
+obtidos através de aproximações, levando a expressões mais simples e sem a necessidade
+de análise do circuito em pequenos sinais.
 
+As seguintes expressões permitem determinar $G_M$ e $R_{out}$:
 \begin{align}
-    Gm = -(g_{m2a} + g_{m2b})
+    Gm = -(g_{m2a} + g_{m2b})   \, [S]
+    \label{eq:gm}
 \end{align}
 
 \begin{align}
-    R_{out} = r_{op} // r_{on} = \frac{1}{g_{op} + g_{on}}
+    R_{out} = r_{op} // r_{on} = \frac{1}{g_{op} + g_{on}} \, [\Omega]
+    \label{eq:rout}
 \end{align}
 
-Where $g_{op}$ and $g_{op}$ are given by:
+Onde $g_{op}$ e $g_{on}$ são obtidos através das expressões:
 
 \begin{align}
-    r_{op} = \frac{1}{g_{op} + g_{on}}
+    g_{on} = \dfrac{g_{gds4P}}{g_{m4P}} \times ({g_{gds2aN} + g_{gds11P}}) \, [S]
+    \label{eq:gon}
 \end{align}
 
+\begin{align}
+    g_{op} = \dfrac{g_{gds6N}}{g_{m6N}} \times ({g_{gds2bP} + g_{gds8N}})   \, [S]
+    \label{eq:gop}
+\end{align}
 
+Da equação inicial do ganho DC, substituindo pelas expressões correspondentes de $G_M$ e $R_{out}$, obtemos a seguinte expressão final, 
+já simplificada, para o ganho DC do circuito CFC OTA:
 
 \vspace{\baselineskip}
 \begin{align}
-A_v = \frac{
+A_v=\frac{
     \big(g_{m4P} \cdot g_{m6N}\big) \big( BE \cdot g_{m2aN} + BE \cdot g_{m2bP} \big)
 }{
     BE \cdot g_{m6N} \cdot g_{ds4P} \cdot \big( g_{ds11P} + g_{ds2aN} \big)
-    + BE \cdot g_{m4P} \cdot g_{ds6N} \cdot \big( g_{ds2bP} + g_{ds8N} \big)
-}
+    + BE \cdot g_{m4P} \cdot g_{ds6N} \cdot \big( g_{ds2bP} + g_{ds8N} \big) 
+} \, [V/V]
+    \label{eq:ganhoFinal}
 \end{align}
 
+ A constante BE representa o efeito de corpo dos transístores em questão.
+
  
+
+\subsection{Produto de ganho e largura de Banda (GBW)}
+O produto de ganho e largura de banda (GBW) é obtido sabendo o ganho em DC e a frequência 
+do polo dominante do circuito, ou seja, a frequência para quando o ganho do amplificador é de 0dB. 
+
+A expressão correspondente ao polo dominante é dada por:
+\begin{align}
+    f_{p1} = \frac{1}{2 \pi \times R_{out} \times C_{out}}  \, [Hz]
+    \label{eq:fp1}
+\end{align}
+
+Onde $C_{out}$ é a capacidade vista do nó de saída do circuito e $R_{out}$
+a resistência vista nesse mesmo nó. 
+
+Sabendo que a expressão do GBW é dada por:
+\begin{align}
+    GBW = \frac{A_v}{f_{p1}}    \, [Hz]
+    \label{eq:GBW}
+\end{align}
+
+E sabendo as expressões de $A_v$ e $f_{p1}$, é possível 
+simplificar a expressão do GBW, obtendo assim:
+
+\begin{align}
+    GBW = \frac{Gm}{2\pi \times C_{out}}    \, [Hz]
+    \label{eq:GBWFinal}
+\end{align}
+
+$C_{out}$, como anteriormente mencionado, é obtido através da análise
+do nó correspondente à saída. Mais concretamente, esta análise 
+consiste em averiguar todas as capacidades ligadas a esse nó.
+
+Dito isto, pela análise do circuito, obtivémos a seguinte expressão para $C_{out}$:
+\begin{align}
+    C_{out} = C_{gd4P} + C_{db4P} + C_{gd6N} + C_{db6N} \,[F]
+    \label{eq:Cout}
+\end{align}
+
+\textcolor{red}{Colocamos alguma imagem aqui?? Tipo, dos condensadores ligados ao nó de saída??}
+
+\subsection{Frequências do segundo e terceiro polos}
+
+\textcolor{red}{Uma explicação melhorzinha sobre como descobrimos os polos 2 e 3}
+
+As frequências do segundo e terceiro polos do circuito são obtidas através da análise
+dos nós internos do circuito, mais concretamente, os nós que correspondem às fontes (sources)
+dos transístores M4 e M6, respetivamente. A sua determinação é importante para garantir a estabilidade do
+circuito em malha fechada.
+
+As expressões para as frequências dos segundos e terceiros polos são dadas por:
+
+\begin{align}
+    F_{p2} = \dfrac{1}{2\pi \times R_{p2} \times C_{p2}} \, [Hz]
+    \label{eq:fp2}
+\end{align}
+
+\begin{align}
+    F_{p3} = \dfrac{1}{2\pi \times R_{p3} \times C_{p3}} \, [Hz]    
+    \label{eq:fp3}
+\end{align}
+
+Para continuar mos a análise, é necessário determinar as expressões equivalentes para $R_{p2}$, $C_{p2}$, $R_{p3}$ e $C_{p3}$.
+Para tal, mais uma vez, recorremos à análise do circuito nos nós correspondentes 
+aos polos 2 e 3, obtendo, primeiro, as equações para a capacidade total em ambos os nós:
+
+
+\begin{align}
+    C_{p2} = C_{gd11} + C_{bd11} + C_{gd2a} + C_{bd2a} + C_{gs4} + C_{bs4} \, [F]  
+    \label{eq:Cp2}  
+\end{align}
+
+\begin{align}
+    C_{p3} = C_{gd8} + C_{bd8} + C_{gd2b} + C_{bd2b} + C_{gs6} + C_{bs6} \, [F]    
+    \label{eq:Cp3}
+\end{align}
+
+E, de seguida, as resistências equivalentes vistas para cada um dos nós:
+
+\begin{align}
+    R_{p2} = \dfrac{1}{gm_4 \times (2-BE)} \, [\Omega]    
+    \label{eq:Rp2}
+\end{align}
+
+\begin{align}
+    R_{p3} = \dfrac{1}{gm_6 \times (2-BE)} \, [\Omega]    
+    \label{eq:Rp3}
+\end{align}
+
+\textcolor{red}{Imagens aqui também??}
+
+
+
+\subsection{OutPut Swing (OS)}
+
+O output swing (OS) do circuito determina a gama de tensões que o circuito pode 
+assumir na sua saída, sem que os transístores saíam da região de saturação. 
+Este parâmetro do circuitot tem em conta as quedas de tensão 
+necessárias para garantir que os transístores de saída operam 
+na zona de inversão moderada, como também a margem de operação, que neste caso é 
+de \SI{80}{\milli\volt}.
+
+A expressão para o output swing do amplificador é dada por:
+\begin{align}
+    OS = V_{DD} - V_{11P} - V_{4P} - V_{6N} - V_{8N} - 0.08 \,[V]
+    \label{eq:OS}
+\end{align}
+
+
+\subsection{Fator de excesso de rúido}
+O fator de excesso de rúido (ENF) do circuito é um parâmetro que
+indica o excesso de rúido criado por um amplificador de ganho $A_{v}$.
+Um amplificador com ENF igual a 1 significa que o mesmo não acrescenta 
+nenhum ruído ao sinal, ou seja, o rúido na saída não tem nenhuma contribuição
+relativa ao rúido gerado pelo próprio amplificador.
+Qualquer valor de ENF superior a 1 indica que o amplificador acrescenta
+rúido ao sinal, que é o caso que se verifica na realidade.
+
+O fator de rúido foi estudado para metade do circuito do CFC OTA, 
+tendo em conta que os transistores em configuração de Cascode 
+não contribuem com ruído. A expressão obtida para o ENF é a seguinte:
+\begin{align}
+    NF = 1 + \frac{ g_{m8N} + g_{m11P} }{ g_{m2aN} + g_{m2bP} }  
+    \label{eq:ENF}
+\end{align}
+
+\subsection{Potência dissipada}
+Para obtermos a potência dissipada pelo circuito, 
+é preciso determinar a corrente total que circula no mesmo. 
+
+Sabendo que a corrente total é dada por:
+\begin{align}
+    I_{total} = 3 \times I_{B} + 4 \times \frac{I_{B}}{10} \, [A]
+    \label{eq:Itotal}
+\end{align}
+
+Podemos então determinar a potência dissipada pelo circuito, através da seguinte expressão:
+\begin{align}
+    P_{dissipada} = V_{DD} \times( 3 \times I_{B} + 4 \times \frac{I_{B}}{10})  \, [W] 
+    \label{eq:Pdissipada}
+\end{align}
+
+
+\subsection{Figura de Mérito (FOM)}
+De forma a avaliar o desempenho global do circuito, foi definida uma figura de mérito (FOM),
+que tem em conta o GBW e a potência dissipada pelo circuito. A expressão para a FOM é dada por:
+\begin{align}
+    FoM = 1000 \cdot \frac{ GBW \cdot C_L }{ P_D }
+    \label{eq:FoM}
+\end{align}
+
+
 
 \newpage

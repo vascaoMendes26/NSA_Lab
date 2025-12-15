@@ -1,3 +1,375 @@
 \section{Dimensionamento}
 
+
+O processo de dimensionamento do circuito consiste em, com base 
+nos resultados obtidos da análise teórica, optimizar os parâmetros de interesse
+de modo a cumprir os requisitos especificados, tendo sempre em conta restrições impostas.
+De acordo a análise teórica, foi desenvolvido um script 
+em \textit{Python} que permite não só calcular os parâmetros de interesse do circuito
+em função das características dos diversos transístores, como também 
+calculcar a razão de tamanho de cada transístor.
+
+Começou-se por definir para cada transístor a sua tensão de saturação como também o seu 
+comprimento. Nesta fase inicial, considerou-se para todos os transístores um comprimento
+de $L = \SI{0.6}{\micro\meter}$ e uma tensão de saturação de $V_{DS,sat} = \SI{0.1}{\volt}$.
+Daí para a frente, com base nos gráficos obtidos em função dos valores anteriormente mencionados,
+procurámos encontrar as melhores características para cada transístor de modo 
+a optimizar o desempenho do circuito.
+
+
+\subsection{Análise ganho DC}
+Como já foi anteriormente referido, o ganho em DC do CFC 
+tem que estar próximo de $62dB$. Para atingir este valor, é preciso
+averiguar quais os transístores que influenciam este parâmetro \newline\newline
+
+
+\begin{table}[h!]
+    \centering
+    % --- ESTA LINHA É QUE FAZ APARECER NO ÍNDICE ---
+    \caption{características dos Transístores que afetam o ganho DC} 
+    \label{tab:gainParameters} 
+    % -----------------------------------------------
+    \vspace{0.2cm}
+    \setlength{\tabcolsep}{25pt}  % aumenta o espaço entre colunas
+
+    \begin{tabular}{ccc}
+        \toprule[1.2pt]
+        \textbf{Transístor} & \textbf{Comprimento} & \textbf{Tensão de Saturação} \\
+        \hline
+        $M_{2aN}$ & Afeta & Afeta \\[0.25cm]
+    
+        $M_{2bP}$ & Afeta & Afeta \\[0.25cm]
+        
+        $M_{4P}$ & Afeta & Afeta \\[0.25cm]
+        
+        $M_{6N}$ & Afeta & Afeta \\[0.25cm]
+        
+        $M_{8N}$ & Afeta & Não Afeta \\[0.25cm]
+        
+        $M_{11P}$ & Afeta & Não Afeta \\[0.25cm]
+        \bottomrule[1.5pt] 
+    \end{tabular}
+\end{table}
+
+\newpage
+Com base na tabela~\ref{tab:gainParameters}, podemos averiguar 
+quais as características dos diferentes transístores que influenciam o ganho DC do circuito.
+Contudo, a informação desta tabela não é suficiente para dimensionar os componentes do mesmo.
+
+Para tal, no script em \textit{Python} foram criados gráficos que relacionam o ganho DC com
+a tensão de saturação e com o comprimento dos transístores, permitindo uma melhor perspectiva
+de como cada característica influencia o ganho DC.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{Images/GainDCGraph.png}
+    \caption{Ganho DC em função de $V_{DSsat}$ e $L$}
+    \label{fig:GainDCGraph}
+\end{figure}
+
+Na figura~\ref{fig:GainDCGraph} podemos observar 
+a relação do ganho DC com a tensão de saturação e com o comprimento dos transístores.
+
+Nesta mesma figura, podemos averiguar a importância das duas características dos
+diversos transístores no ganho DC do circuito.
+
+\subsection{Análise do produto do Ganho com Largura de banda (GBW)}
+Para o GBW, neste projeto foi nos requisitado um valor aproximado de 50Mhz.
+Tal como no ganho DC, aqui também foi necessário averiguar quais os transístores
+que influenciam este parâmetro. 
+
+Para construirmos esta tabela, tivemos em atenção a equação~\ref{eq:gm}, 
+a equação~\ref{eq:GBWFinal} e a equação~\ref{eq:Cout}. 
+Estas equações são fundamentais para
+determinar quais os transístores que influenciam o GBW.
+
+\begin{table}[h!]
+    \centering
+    % --- ESTA LINHA É QUE FAZ APARECER NO ÍNDICE ---
+    \caption{características dos Transístores que afetam o GBW} 
+    \label{tab:gainParameters} 
+    % -----------------------------------------------
+    \vspace{0.2cm}
+    \setlength{\tabcolsep}{25pt}  % aumenta o espaço entre colunas
+
+    \begin{tabular}{ccc}
+        \toprule[1.2pt]
+        \textbf{Transístor} & \textbf{Comprimento} & \textbf{Tensão de Saturação} \\
+        \hline
+        $M_{2aN}$ & Não Afeta & Afeta \\[0.25cm]
+    
+        $M_{2bP}$ & Não Afeta & Afeta \\[0.25cm]
+        
+        $M_{4P}$ & Afeta & Afeta \\[0.25cm]
+        
+        $M_{6N}$ & Afeta & Não Afeta \\[0.25cm]
+        
+        \bottomrule[1.5pt] 
+    \end{tabular}
+\end{table}
+
+Também para o GBW, foram criados gráficos que relacionam o GBW com
+a tensão de saturação e com o comprimento dos transístores, permitindo
+uma melhor perspectiva para o dimensionamento dos componentes do circuito.
+
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{Images/GBWGraph.png}
+    \caption{Ganho DC em função de $V_{DSsat}$ e $L$}
+    \label{fig:GBWGraph}
+\end{figure}
+
+\newpage
+Na figura~\ref{fig:GBWGraph} podemos observar 
+a relação do GBW com a tensão de saturação e com o comprimento dos transístores.
+
+Nesta mesma figura, podemos averiguar a importância das duas características dos
+diversos transístores no GBW do circuito.
+
+\subsection{Análise da Frequência dos polos}
+Neste trabalho é requisito que a frequência do segundo polo seja superior a 200MHz e 
+a frequência do terceiro polo seja superior a 500MHz, de forma a garantir
+estabilidade numa configuração em malha-fechada de ganho unitário.
+
+Para tal, aqui também foram obtidos os gráficos correspondentes, como nas secções 
+anteriores.
+\newpage
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{Images/fp2Graph.png}
+    \caption{Frequência do segundo polo em função de $V_{DSsat}$ e $L$}
+    \label{fig:fp2Graph}
+\end{figure}
+
+
+Pela análise da figura~\ref{fig:fp2Graph}, podemos observar
+a relação da frequência do segundo polo com a tensão de saturação e com o comprimento dos 
+transístores. Aqui podemos notar que o transístor $M_{4P}$ é o que mais influencia
+o comportamento da frequência do segundo polo.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{Images/fp3Graph.png}
+    \caption{Frequência do terceiro polo em função de $V_{DSsat}$ e $L$}
+    \label{fig:fp3Graph}
+\end{figure}
+
+Pela análise da figura~\ref{fig:fp3Graph}, podemos observar
+a relação da frequência do terceiro polo com a tensão de saturação e com o comprimento dos
+transístores. Aqui podemos notar que a tensão de saturação do transístor $M_{4P}$ é a
+que mais influencia o comportamento da frequência do terceiro polo, mas como 
+também o comprimento do transístor $M_{6N}$ tem uma influência significativa.
+
+
+\subsection{Análise do Output Swing(OS)}
+Pela equação~\ref{eq:OS}, o valor associado ao output swing varia
+em função dos valores de $V_{DS,sat}$ dos transístores $M_{4P}$ ,$M_{6N}$, $M_{8N}$ e $M_{11P}$.
+
+Desta forma, não houve necessidade de criar gráficos adicionais, uma vez
+que existe uma relação direta entre o output swing e a tensão de saturação dos diversos
+transístores mencionados.
+
+
+\subsection{Análise do Fator de excesso de rúido}
+O fator de excesso de rúido (ENF) do circuito é 
+um parâmetro que encontra-se afetado pelos valores de $V_{DS,sat}$ dos 
+transístores $M_{2aN}$, $M_{2bP}$, $M_{8N}$ e $M_{11P}$.
+
+Tendo isso em conta, o seguinte gráfico foi obtido, relacionando o ENF com a tensão de saturação
+desses transistores já mencionados.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{Images/NFGraph.png}
+    \caption{Fator de excesso de rúido em função de $V_{DSsat}$}
+    \label{fig:NFGraph}
+\end{figure}
+
+A figura~\ref{fig:NFGraph} mostra a relação anteriormente referida.
+
+\subsection{Análise da potência dissipada}
+Pela equação~\ref{eq:Pdissipada}, a corrente de Bias é o único parâmetro que pode ser 
+variável de forma a influenciar a potência dissipada no circuito.
+
+No caso, numa primeira fase do dimensionamento, considerou-se um valor de $I_{B} = \SI{100}{\micro\ampere}$. 
+Numa fase posterior, viu-se a necessidade de reduzir este valor para $I_{B} = \SI{75}{\micro\ampere}$, de forma
+a melhorar outros parâmetros, como o GBW, dependentes desta corrente.
+
+
+\subsection{Dimensionamento Final}
+Antes de proceder ao dimensionamento final do circuito, 
+é importante estabelecer relações entre os diversos transistores presentes no circuito.
+
+Como mencionado na análise teórica, a análise do circuito
+foi feita considerando uma das metades do mesmo, sendo a metade analisada
+correspondente aos transístores de saída do CFC.
+
+Daí a importância de estabelecer as relações entre os transistores.
+As seguintes equações representam essas relações:
+
+\begin{align}
+    M_{2aN} = M_{1aN}
+    \label{eq:ratio1}
+\end{align}
+\begin{align}   
+    M_{2bP} = M_{1bP}
+    \label{eq:ratio2} 
+\end{align}
+\begin{align}
+    M_{4P} = M_{3P}
+    \label{eq:ratio3} 
+\end{align}
+\begin{align}
+    M_{6N} = M_{5N}
+    \label{eq:ratio4}
+\end{align}
+\begin{align}
+    M_{8N} = M_{7N}
+    \label{eq:ratio5}
+\end{align}
+\begin{align}
+    M_{11P} = M_{10P}
+    \label{eq:ratio6}
+\end{align}
+
+O dimensionamento dos transístores $M_{9aN}$ e $M_{9bP}$ foi feito 
+de formar a ajustar os parâmetros de interesse do circuito, daí 
+a sua ausência nas equações anteriores.
+
+Também foi do nosso interesse dimensionar o circuito Bias. Para tal,
+aqui também foram estabelecidas relações entre os transístores do circuito Bias com os 
+transístores do CFC OTA, como se pode observar nas seguintes equações:
+
+\begin{align}
+    M_{B1P} = M_{B2P} = M_{4BP} = M_{9bP}
+    \label{eq:bias1}
+\end{align}
+\begin{align}
+    M_{B3N} = M_{B7N} = M_{9aN}
+    \label{eq:bias2}
+\end{align}
+\begin{align}
+    M_{B5N} = M_{6N} 
+    \label{eq:bias3}
+\end{align}
+\begin{align}
+    M_{B6P} = M_{4P} 
+    \label{eq:bias4}
+\end{align}
+
+De notar que, para o circuito Bias, considerou-se uma corrente 
+10 vezes menor que a corrente de Bias do CFC OTA, ou seja, $I_{Bias} = \frac{I_{B}}{10}$.
+
+Após a análise de todos os parâmetros de interesse do circuito e com o
+auxílio do script desenvolvido em \textit{Python}, 
+chegámos a um dimensionamento final para o circuito, 
+cujo resumo se encontra na tabela~\ref{tab:finalSizing}. 
+
+
+\begin{table}[h!]
+    \centering
+    % --- ESTA LINHA É QUE FAZ APARECER NO ÍNDICE ---
+    \caption{Dimensionamento Final dos Transístores(Teórico)} 
+    \label{tab:finalSizing} 
+    % -----------------------------------------------
+    \vspace{0.2cm}
+    \setlength{\tabcolsep}{25pt}  % aumenta o espaço entre colunas
+
+    \begin{tabular}{cccc}
+        \toprule[1.2pt]
+        \textbf{Transístor} & \textbf{Comprimento} & \textbf{Largura} & \textbf{VDSsat}\\
+        \hline
+        $M_{2aN}$ & $\SI{100}{\nano\meter}$ & $\SI{90.30}{\micro\meter}$ & $\SI{55}{\milli\volt}$\\[0.25cm]
+
+        $M_{2bP}$ & $\SI{100}{\nano\meter}$ & $\SI{90.30}{\micro\meter}$ & $\SI{55}{\milli\volt}$\\[0.25cm]
+
+        $M_{4P}$ & $\SI{800}{\nano\meter}$ & $\SI{26.03}{\micro\meter}$ & $\SI{97}{\milli\volt}$\\[0.25cm]
+        
+        $M_{6N}$ & $\SI{800}{\nano\meter}$ & $\SI{20.50}{\micro\meter}$ & $\SI{100}{\milli\volt}$\\[0.25cm]
+
+        $M_{8N}$ & $\SI{800}{\nano\meter}$ & $\SI{40.49}{\micro\meter}$ & $\SI{110}{\milli\volt}$\\[0.25cm]
+
+        $M_{11P}$ & $\SI{800}{\nano\meter}$ & $\SI{21.77}{\micro\meter}$ & $\SI{150}{\milli\volt}$\\[0.25cm]
+
+        $M_{9aN}$ & $\SI{800}{\nano\meter}$ & $\SI{34.02}{\micro\meter}$ & $\SI{120}{\milli\volt}$\\[0.25cm]
+
+        $M_{9bP}$ & $\SI{800}{\nano\meter}$ & $\SI{57.16}{\micro\meter}$ & $\SI{120}{\milli\volt}$\\[0.25cm]
+        
+        \bottomrule[1.5pt] 
+    \end{tabular}
+\end{table}
+
+\newpage
+Uma tabela semelhante foi também criada para o circuito Bias,
+cujo resumo se encontra na tabela~\ref{tab:finalSizingBias}.
+
+\begin{table}[h!]
+    \centering
+    % --- ESTA LINHA É QUE FAZ APARECER NO ÍNDICE ---
+    \caption{Dimensionamento Final dos Transístores do circuito Bias (Teórico)} 
+    \label{tab:finalSizingBias} 
+    % -----------------------------------------------
+    \vspace{0.2cm}
+    \setlength{\tabcolsep}{25pt}  % aumenta o espaço entre colunas
+
+    \begin{tabular}{ccc}
+        \toprule[1.2pt]
+        \textbf{Transístor} & \textbf{Comprimento} & \textbf{Largura}\\
+        \hline
+        $M_{B1P}$ & $\SI{800}{\nano\meter}$ & $\SI{6.04}{\micro\meter}$\\[0.25cm]
+
+        $M_{B2P}$ & $\SI{800}{\nano\meter}$ & $\SI{6.04}{\micro\meter}$\\[0.25cm]
+
+        $M_{B3N}$ & $\SI{800}{\nano\meter}$ & $\SI{3.38}{\micro\meter}$\\[0.25cm]
+        
+        $M_{4BP}$ & $\SI{800}{\nano\meter}$ & $\SI{6.04}{\micro\meter}$\\[0.25cm]
+
+        $M_{B5N}$ & $\SI{800}{\nano\meter}$ & $\SI{4.86}{\micro\meter}$\\[0.25cm]
+
+        $M_{B6P}$ & $\SI{800}{\nano\meter}$ & $\SI{9.24}{\micro\meter}$\\[0.25cm]
+
+        $M_{B7N}$ & $\SI{800}{\nano\meter}$ & $\SI{3.38}{\micro\meter}$\\[0.25cm]
+        
+        \bottomrule[1.5pt] 
+    \end{tabular}
+\end{table}
+
+Dados os valores da tabela~\ref{tab:finalSizing}, o resultado esperado para 
+a simulação do circuito é dado na seguinte tabela~\ref{tab:expectedResults}.
+
+
+\begin{table}[h!]
+    \centering
+    % --- ESTA LINHA É QUE FAZ APARECER NO ÍNDICE ---
+    \caption{Resultados Esperados na simulação} 
+    \label{tab:expectedResults} 
+    % -----------------------------------------------
+    \vspace{0.2cm}
+
+    \begin{tabular}{cc}
+        \toprule[1.2pt] 
+        \textbf{Parâmetro} & \textbf{Resultado} \\ 
+        \midrule 
+        Ganho & 62.365  \text{dB} \\ 
+        \hline
+        GBW  & 69.007 \text{MHz} \\ 
+        \hline
+        $f_{p2}$ & 348.900 \text{MHz} \\ 
+        \hline
+        $f_{p3}$ &  500.520 \text{MHz} \\ 
+        \hline
+        Output Swing (OS)  & 663.000 \text{mV} \\ 
+        \hline
+        Fator de excesso de ruído & 1.87 \\ 
+        \hline
+        Potência dissipada & 306.000 \text{$\mu$W} \\
+        \hline
+        Figura de Mérito (FOM) & $1128\,s/{V^{-2}}$ \\
+        \bottomrule[1.5pt] 
+    \end{tabular}
+\end{table}
+
+
+
 \newpage
