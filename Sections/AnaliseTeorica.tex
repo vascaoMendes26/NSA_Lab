@@ -17,27 +17,37 @@ na Figura \ref{fig:Cascode}, o CFC parte da mesma topologia, mas tem algumas mod
     \label{fig:Cascode}
 \end{figure}
 
-Ao olharmos para o circuito e como foi estudado este é diferencial, portanto podemos apenas estudar metade do circuito,
+Ao olharmos para o circuito e como foi estudado, este é diferencial, portanto podemos apenas estudar metade do circuito,
 devido à sua simetria, o circuito é possível ser visto na Figura \ref{fig:Circ_Simp}.
 
-\begin{figure}[htp]
+
+\begin{figure}[h!]
     \centering
-    \includegraphics[width=15cm]{Images/Circ_Analisado_Teorica.png}
-    \caption{CFC OTA simplificado}
-    \label{fig:Circ_Simp}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Circ_Analisado_Teorica.png}
+    \caption{CFC OTA com circuito simplificado realçado}
+        \label{fig:Circ_Simp}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/Simplificadao.png}
+    \caption{Circuito Simplificado}
+        \label{fig:SimplificadoMaximo}
+    \end{subfigure}
+    
+    \caption{Simplificação realizada para efeitos de simplificação na Análise Teórica}
+    \label{fig:circuitos_completos}
 \end{figure}
+
+
 
 Na Figura \ref{fig:SimplificadoMaximo} está representado o circuito simplificado, este que foi escolhido devido a ter 
 o nó de saída, ficando mais simples de retirar os parâmetros e de analisar o circuito. 
 Nas subsecções abaixo constaram as explicações de como foram retiradas as expressões e os valores que foram meencionados ao longo 
 do relatório.
 
-\begin{figure}[htp]
-    \centering
-    \includegraphics[width=15cm]{Images/Simplificadao.png}
-    \caption{Circuito Simplificado}
-    \label{fig:Circ_Simp}
-\end{figure}
+
 
 
 \subsection{Ganho DC}
@@ -58,7 +68,7 @@ de análise do circuito em pequenos sinais.
 
 As seguintes expressões permitem determinar $G_M$ e $R_{out}$:
 \begin{align}
-    Gm = -(g_{m2a} + g_{m2b})   \, [S]
+    G_m = -(g_{m2a} + g_{m2b})   \, [S]
     \label{eq:gm}
 \end{align}
 
@@ -120,29 +130,37 @@ E sabendo as expressões de $A_v$ e $f_{p1}$, é possível
 simplificar a expressão do GBW, obtendo assim:
 
 \begin{align}
-    GBW = \frac{Gm}{2\pi \times C_{out}}    \, [Hz]
+    GBW = \frac{G_m}{2\pi \times C_{out}}\, [Hz]
     \label{eq:GBWFinal}
 \end{align}
 
 $C_{out}$, como anteriormente mencionado, é obtido através da análise
 do nó correspondente à saída. Mais concretamente, esta análise 
-consiste em averiguar todas as capacidades ligadas a esse nó.
+consiste em averiguar todas as capacidades ligadas a esse nó, essas capacidades podem ser vistas na Figura \ref{fig:Condensadores}
 
-Dito isto, pela análise do circuito, obtivémos a seguinte expressão para $C_{out}$:
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=4cm]{Images/Cout.png}
+    \caption{Condensadores Parasitas ligados ao nó de saída}
+    \label{fig:Condensadores}
+\end{figure}
+
+
+Dito isto, pela análise do circuito acima, obtivémos a seguinte expressão para $C_{out}$ está representada na Equação \ref{eq:Cout}:
+
 \begin{align}
     C_{out} = C_{gd4P} + C_{db4P} + C_{gd6N} + C_{db6N} \,[F]
     \label{eq:Cout}
 \end{align}
 
-\textcolor{red}{Colocamos alguma imagem aqui?? Tipo, dos condensadores ligados ao nó de saída??}
 
 \subsection{Frequências do segundo e terceiro polos}
 
 \textcolor{red}{Uma explicação melhorzinha sobre como descobrimos os polos 2 e 3}
 
 As frequências do segundo e terceiro polos do circuito são obtidas através da análise
-dos nós internos do circuito, mais concretamente, os nós que correspondem às fontes (sources)
-dos transístores M4 e M6, respetivamente. A sua determinação é importante para garantir a estabilidade do
+dos nós internos do circuito, mais concretamente, os nós que correspondem às fontes, como é possível ver na Figura \ref{fig:SimplificadoMaximo} está legendado onde estão localizados estes dois polos,
+estes que se encontram ligados aos transistores M4 e M6, respetivamente. A sua determinação é importante para garantir a estabilidade do
 circuito em malha fechada.
 
 As expressões para as frequências dos segundos e terceiros polos são dadas por:
@@ -157,7 +175,7 @@ As expressões para as frequências dos segundos e terceiros polos são dadas po
     \label{eq:fp3}
 \end{align}
 
-Para continuar mos a análise, é necessário determinar as expressões equivalentes para $R_{p2}$, $C_{p2}$, $R_{p3}$ e $C_{p3}$.
+Para continuar a análise, é necessário realizar alguns cálculos intermédios para determinar as expressões equivalentes para $R_{p2}$, $C_{p2}$, $R_{p3}$ e $C_{p3}$.
 Para tal, mais uma vez, recorremos à análise do circuito nos nós correspondentes 
 aos polos 2 e 3, obtendo, primeiro, as equações para a capacidade total em ambos os nós:
 
@@ -184,7 +202,12 @@ E, de seguida, as resistências equivalentes vistas para cada um dos nós:
     \label{eq:Rp3}
 \end{align}
 
-\textcolor{red}{Imagens aqui também??}
+Nas equações \ref{eq:Rp2} e \ref{eq:Rp3}, o fator $(2-BE)$ justifica-se pela presença do efeito de corpo nos transístores $M_4$ e $M_6$.
+
+Como estes transístores estão na configuração de common-gate, o efeito de corpo influencia, aumentando a transcondutância dos mesmos.
+ Matematicamente, isto reflete-se no denominador da equação, resultando num valor de resistência menor do que seria num transístor ideal sem este efeito.
+
+\textcolor{red}{Imagens aqui também?? Desenho Amanhã que tou com perguiça já apanhei rage bait com a de cima}
 
 
 
@@ -214,8 +237,9 @@ Qualquer valor de ENF superior a 1 indica que o amplificador acrescenta
 rúido ao sinal, que é o caso que se verifica na realidade.
 
 O fator de rúido foi estudado para metade do circuito do CFC OTA, 
-tendo em conta que os transistores em configuração de Cascode 
-não contribuem com ruído. A expressão obtida para o ENF é a seguinte:
+tendo em conta que foi ralizada uma amproximaçaõ e não foram contabilizados os excessos de ruído dos transistores em configuração de Cascode. 
+A expressão obtida para o ENF é a seguinte:
+
 \begin{align}
     NF = 1 + \frac{ g_{m8N} + g_{m11P} }{ g_{m2aN} + g_{m2bP} }  
     \label{eq:ENF}
@@ -232,6 +256,7 @@ Sabendo que a corrente total é dada por:
 \end{align}
 
 Podemos então determinar a potência dissipada pelo circuito, através da seguinte expressão:
+
 \begin{align}
     P_{dissipada} = V_{DD} \times( 3 \times I_{B} + 4 \times \frac{I_{B}}{10})  \, [W] 
     \label{eq:Pdissipada}

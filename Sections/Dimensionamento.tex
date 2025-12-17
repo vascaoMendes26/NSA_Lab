@@ -19,8 +19,8 @@ a optimizar o desempenho do circuito.
 
 \subsection{Análise ganho DC}
 Como já foi anteriormente referido, o ganho em DC do CFC 
-tem que estar próximo de $62dB$. Para atingir este valor, é preciso
-averiguar quais os transístores que influenciam este parâmetro \newline\newline
+tem que estar próximo de $62dB$. Para atingir este valor, foi necessário ver quais os transístores que influenciam este parâmetro,
+a conclusão pode ser vista na Tabela \ref{tab:gainParameters} \newline\newline
 
 
 \begin{table}[h!]
@@ -62,7 +62,7 @@ de como cada característica influencia o ganho DC.
 
 \begin{figure}[htp]
     \centering
-    \includegraphics[width=15cm]{Images/GainDCGraph.png}
+    \includegraphics[width=8cm]{Images/GainDCGraph.png}
     \caption{Ganho DC em função de $V_{DSsat}$ e $L$}
     \label{fig:GainDCGraph}
 \end{figure}
@@ -264,13 +264,13 @@ De notar que, para o circuito Bias, considerou-se uma corrente
 Após a análise de todos os parâmetros de interesse do circuito e com o
 auxílio do script desenvolvido em \textit{Python}, 
 chegámos a um dimensionamento final para o circuito, 
-cujo resumo se encontra na tabela~\ref{tab:finalSizing}. 
+na qual se encontra na tabela~\ref{tab:finalSizing}. 
 
 
 \begin{table}[h!]
     \centering
     % --- ESTA LINHA É QUE FAZ APARECER NO ÍNDICE ---
-    \caption{Dimensionamento Final dos Transístores(Teórico)} 
+    \caption{Dimensionamento Final dos Transístores (Teórico)} 
     \label{tab:finalSizing} 
     % -----------------------------------------------
     \vspace{0.2cm}
@@ -278,11 +278,11 @@ cujo resumo se encontra na tabela~\ref{tab:finalSizing}.
 
     \begin{tabular}{cccc}
         \toprule[1.2pt]
-        \textbf{Transístor} & \textbf{Comprimento} & \textbf{Largura} & \textbf{VDSsat}\\
+        \textbf{Transístor} & \textbf{Length(L)} & \textbf{Width(W)} & \textbf{VDSsat}\\
         \hline
-        $M_{2aN}$ & $\SI{100}{\nano\meter}$ & $\SI{90.30}{\micro\meter}$ & $\SI{55}{\milli\volt}$\\[0.25cm]
+        $M_{2aN}$ & $\SI{1}{\micro\meter}$ & $\SI{90.30}{\micro\meter}$ & $\SI{55}{\milli\volt}$\\[0.25cm]
 
-        $M_{2bP}$ & $\SI{100}{\nano\meter}$ & $\SI{90.30}{\micro\meter}$ & $\SI{55}{\milli\volt}$\\[0.25cm]
+        $M_{2bP}$ & $\SI{1}{\micro\meter}$ & $\SI{90.30}{\micro\meter}$ & $\SI{55}{\milli\volt}$\\[0.25cm]
 
         $M_{4P}$ & $\SI{800}{\nano\meter}$ & $\SI{26.03}{\micro\meter}$ & $\SI{97}{\milli\volt}$\\[0.25cm]
         
@@ -315,34 +315,33 @@ cujo resumo se encontra na tabela~\ref{tab:finalSizingBias}.
 
     \begin{tabular}{ccc}
         \toprule[1.2pt]
-        \textbf{Transístor} & \textbf{Comprimento} & \textbf{Largura}\\
+        \textbf{Transístor} & \textbf{Length(L)} & \textbf{Width(W)}\\
         \hline
-        $M_{B1P}$ & $\SI{800}{\nano\meter}$ & $\SI{6.04}{\micro\meter}$\\[0.25cm]
+        $M_{B1P}$ & $\SI{800}{\nano\meter}$ & $\SI{4.535}{\micro\meter}$\\[0.25cm]
 
-        $M_{B2P}$ & $\SI{800}{\nano\meter}$ & $\SI{6.04}{\micro\meter}$\\[0.25cm]
+        $M_{B2P}$ & $\SI{800}{\nano\meter}$ & $\SI{4.535}{\micro\meter}$\\[0.25cm]
 
-        $M_{B3N}$ & $\SI{800}{\nano\meter}$ & $\SI{3.38}{\micro\meter}$\\[0.25cm]
+        $M_{B3N}$ & $\SI{800}{\nano\meter}$ & $\SI{6.53}{\micro\meter}$\\[0.25cm]
         
-        $M_{4BP}$ & $\SI{800}{\nano\meter}$ & $\SI{6.04}{\micro\meter}$\\[0.25cm]
+        $M_{4BP}$ & $\SI{800}{\nano\meter}$ & $\SI{4.535}{\micro\meter}$\\[0.25cm]
 
         $M_{B5N}$ & $\SI{800}{\nano\meter}$ & $\SI{4.86}{\micro\meter}$\\[0.25cm]
 
         $M_{B6P}$ & $\SI{800}{\nano\meter}$ & $\SI{9.24}{\micro\meter}$\\[0.25cm]
 
-        $M_{B7N}$ & $\SI{800}{\nano\meter}$ & $\SI{3.38}{\micro\meter}$\\[0.25cm]
+        $M_{B7N}$ & $\SI{800}{\nano\meter}$ & $\SI{6.53}{\micro\meter}$\\[0.25cm]
         
         \bottomrule[1.5pt] 
     \end{tabular}
 \end{table}
 
-Dados os valores da tabela~\ref{tab:finalSizing}, o resultado esperado para 
-a simulação do circuito é dado na seguinte tabela~\ref{tab:expectedResults}.
+Dados os valores da tabela~\ref{tab:finalSizing}, o resultado teórico obtido para circuito é dado na seguinte tabela~\ref{tab:expectedResults}.
 
 
 \begin{table}[h!]
     \centering
     % --- ESTA LINHA É QUE FAZ APARECER NO ÍNDICE ---
-    \caption{Resultados Esperados na simulação} 
+    \caption{Resultados Obtidos no script em Python} 
     \label{tab:expectedResults} 
     % -----------------------------------------------
     \vspace{0.2cm}
