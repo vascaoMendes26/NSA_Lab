@@ -1,0 +1,426 @@
+\section{Simulação}
+
+Nesta secção é apresentada a simulação de todo o design obtido na secção anterior, todas as Figuras e valores obtidos
+foram através do Cadence. 
+
+A primeira etapa foi simular o circuito com as especificações obtidas na Tabela \ref{tab:expectedResults}, esta que como dito já está otimizada para os valores 
+pretendidos. O script python só está otimizado e o mais próximo do valor real, após serem obtidos os valores das constantes dos $g_{ds}$
+devido a isto e ao facto de utilizarmos valores ideias, para que não haja uma perda signficativa face aos resultados pretendidos, foi feito um varrimento para $M_{b5}$ e $M_{b6}$ para otimizar os 
+resultados, os valores finais podem ser vistos na Tabela \ref{tab:transistores_dimensoes} e nas Figuras \ref{fig:bias} e \ref{fig:ota}.
+
+\begin{table}[h!]
+    \centering
+    \caption{Dimensões finais dos Transistores implementados no Cadence}
+    \label{tab:transistores_dimensoes}
+    \vspace{0.10cm} % Espaço para não ficar colado ao título
+    
+    % Aumentar o espaçamento entre linhas para ficar legível (opcional)
+    \renewcommand{\arraystretch}{1}
+
+    \begin{tabular}{cccc}
+        \toprule[1pt]
+       \textbf{Transistor} & \textbf{Length (L)} & \textbf{Width (W)} & \textbf{Fingers} \\
+    \midrule
+    
+    $M_{B1}, \, M_{B2}, \, M_{B4}$ & 800\,nm & 4.535\,$\mu$m & 1 \\
+    \hline
+    $M_{B3}, \, M_{B7}$ & 800\,nm & 6.53\,$\mu$m & 1 \\
+    \hline
+    $M_{B5}$ & 800\,nm & 670\,nm & 1 \\
+    \hline
+    $M_{B6}$ & 800\,nm & 740\,nm & 1 \\
+    \hline
+    $M_{1a}, \, M_{2a}, \, M_{1b}, \, M_{2b}$ & 1\,$\mu$m & 145.68\,$\mu$m & 1\\
+    \hline
+    $M_{3}, \, M_{4}$ & 800\,nm & 66.65\,$\mu$m & 1 \\
+    \hline
+    $M_{5}, \, M_{6}$ & 800\,nm & 32.66\,$\mu$m & 1 \\
+    \hline
+    $M_{7}, \, M_{8}$ & 800\,nm & 65.32 \,$\mu$m & 1 \\
+    \hline
+    $M_{9a}, \, M_{9b}$ & 800\,nm & 65.32\,$\mu$m & 1 \\
+    \hline
+    $M_{10}, \, M_{11}$ & 800\,nm & 45.36\,$\mu$m & 1 \\
+       
+        \bottomrule[1.2pt]
+    \end{tabular}
+\end{table}
+
+
+
+
+
+
+
+\subsection{Ajustes Finos nos Transistores do Circuito}
+
+Contudo e após a realização de diversas simulações, concluiu-se que o dimensionamento inicial, 
+obtido através do script em Python e os ligeiros ajustes efetuados acima, 
+não correspondiam ainda ao ponto de otimização máximo que gostaríamos de obter.
+Embora esses valores estivessem dentro dos valores pretendidos, não refletiam o equilíbrio ideal entre Ganho, GBW e menor Potência consumida, resultando na maximização da Figura de Mérito (FoM), 
+um dos claros objetivos deste trabalho.
+
+Para melhorarmos o desempenho, foram efetuados varrimentos paramétricos e ajustes finos nas dimensões dos transístores no Cadence, de modo a poder chegar a esse "ponto ideal de funcionamento". 
+Estas iterações permitiram melhorar muito os nossos valores, conduzindo aos valores finais apresentados nas secções seguintes, os quais garantem o melhor compromisso de performance para este projeto.
+Ao longo das seguintes secções iremos comparar as simulações com valores otimizados com os valores acima obtidos,
+realçando a melhoria obtida. Os valores otimizados podem ser vistos abaixo: 
+
+
+
+
+\begin{figure}[h!]
+    \centering
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/BiasCircuit.png}
+        \caption{Bias Circuit}
+        \label{fig:bias}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.48\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/CFC_OTA.png}
+        \caption{CFC OTA}
+        \label{fig:ota}
+    \end{subfigure}
+    
+    \caption{Esquemas dos circuitos: (a) Circuito de polarização e (b) OTA.}
+    \label{fig:circuitos_completos}
+\end{figure}
+
+
+\begin{table}[h!]
+    \centering
+    \caption{Dimensões finais dos Transistores após otimização implementados no Cadence}
+    \label{tab:transistores_dimensoes}
+    \vspace{0.10cm} % Espaço para não ficar colado ao título
+    
+    % Aumentar o espaçamento entre linhas para ficar legível (opcional)
+    \renewcommand{\arraystretch}{1}
+
+    \begin{tabular}{cccc}
+        \toprule[1pt]
+       \textbf{Transistor} & \textbf{Length (L)} & \textbf{Width (W)} & \textbf{Fingers} \\
+    \midrule
+    
+    $M_{B1}, \, M_{B2}, \, M_{B4}$ & 800\,nm & 4.535\,$\mu$m & 1 \\
+    \hline
+    $M_{B3}, \, M_{B7}$ & 800\,nm & 6.53\,$\mu$m & 1 \\
+    \hline
+    $M_{B5}$ & 800\,nm & 380\,nm & 1 \\
+    \hline
+    $M_{B6}$ & 800\,nm & 800\,nm & 1 \\
+    \hline
+    $M_{1a}, \, M_{2a}, \, M_{1b}, \, M_{2b}$ & 1\,$\mu$m & 290\,$\mu$m & 1\\
+    \hline
+    $M_{3}, \, M_{4}$ & 800\,nm & 35\,$\mu$m & 1 \\
+    \hline
+    $M_{5}, \, M_{6}$ & 800\,nm & 38\,$\mu$m & 1 \\
+    \hline
+    $M_{7}, \, M_{8}$ & 800\,nm & 65.32 \,$\mu$m & 1 \\
+    \hline
+    $M_{9a}, \, M_{9b}$ & 800\,nm & 65.32\,$\mu$m & 1 \\
+    \hline
+    $M_{10}, \, M_{11}$ & 800\,nm & 45.36\,$\mu$m & 1 \\
+       
+        \bottomrule[1.2pt]
+    \end{tabular}
+\end{table}
+
+Após terem sido obtidos os tamanhos de cada transistor, foi criado o bloco completo, que será usado nas simulações abaixo. Este circuito
+é possível ser visto na Figura \ref{fig:TudoJunto}.
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=15cm]{Images/TudoJunto.png}
+    \caption{Símbolo do Circuito no Cadence}
+    \label{fig:TudoJunto}
+\end{figure}
+
+\newpage
+
+\subsection{Simulação DC}
+
+A simulação DC foi realizada com o objetivo de verificar a polarização do circuito onde foi usada uma corrente de $I_b = 80 \text{$\mu$A}$, estando os resultados obtidos ilustrados na Figuras \ref{fig:BiasOP} e \ref{fig:otaOP}.
+Estes resultados encontram-se igualmente nas Tabelas \ref{tab:dc_bias} e \ref{tab:dc_main}. 
+
+A análise do ponto de funcionamento mostra que os transístores operam na região de saturação, esta região de operação é adequada, não comprometendo o desempenho.
+
+Apesar da tensão $V_{dsat}$ dos transistores $M_{10}$ e $M_{11}$ ser pouco maior do que o requisito, foi considerado aceitável dado que não compromete com o Output Swing
+nem o coloca fora da zona de saturação.
+
+Olhando para os valores das correntes, existe vemos que existem algumas discrepâncias no valor das mesmas no circuito principal isto
+deve-se à não idealidade dos transístores, sendo estas influenciadas pelas dimensões dos dispositivos e pelo circuito de polarização. 
+
+Embora este facto não represente um problema crítico visto que o circuito funciona conforme o esperado e as 
+correntes apresentam valores razoáveis para o seu correto funcionamento, não atingido os valores máximos desta topologia.
+
+Os valores das simulações DC podem ser vistos abaixo: 
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/BiasOP.png}
+        \caption{Simulação DC para circuito de Bias}
+        \label{fig:BiasOP}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.49\textwidth}
+        \centering
+        \includegraphics[width=\textwidth]{Images/OTAOP.png}
+        \caption{Simulação DC para circuito principal}
+        \label{fig:otaOP}
+    \end{subfigure}
+    
+    \caption{Resultados da Simulação DC para ambos os circuitos}
+    \label{fig:circuitos_completos}
+\end{figure}
+
+
+
+
+
+% --- Tabela VIII: Bias Circuit ---
+
+\begin{table}[H]
+
+    \centering
+
+    \caption{Resultados da Simulação DC para circuito de bias}
+
+    \label{tab:dc_bias}
+
+    \vspace{0.2cm}
+
+    \renewcommand{\arraystretch}{1} % Espaçamento para ficar arejado
+
+
+
+    \begin{tabular}{ccc}
+
+        \toprule[1pt]
+
+        \textbf{Transistor} & \boldmath{$V_{DSat}$} & \boldmath{$I_{D}$} \\
+
+        \midrule
+
+       
+
+        $M_{B1}$ & $-155.7 \, \text{mV}$ & $-8 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{B2}$ & $-155.7 \, \text{mV}$ & $-8.897 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{B3}$ & $88.84 \, \text{mV}$ & $8.898 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{B4}$ & $-155.7 \, \text{mV}$ & $-8.343 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{B5}$ & $297.5 \, \text{mV}$ & $8.343 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{B6}$ & $-346.9 \, \text{mV}$ & $-9.243 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{B7}$ & $89.17 \, \text{mV}$ & $9.243 \, \mu\text{A}$ \\
+
+       
+
+        \bottomrule[1pt]
+
+    \end{tabular}
+
+\end{table}
+% --- Tabela IX: Main Circuit (CFC OTA) ---
+
+\begin{table}[H]
+
+    \centering
+
+    \caption{Resultados da Simulação DC para circuito principal}
+
+    \label{tab:dc_main}
+
+    \vspace{0.2cm}
+
+    \renewcommand{\arraystretch}{1.3}
+
+
+
+    \begin{tabular}{ccc}
+
+        \toprule[1pt]
+
+        \textbf{Transistor} & \boldmath{$V_{DSat}$} & \boldmath{$I_{D}$} \\
+
+        \midrule
+
+       
+
+        $M_{1a}$ & $58.3 \, \text{mV}$ & $42.52 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{1b}$ & $-78.56 \, \text{mV}$ & $-36.57 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{2a}$ & $58.24 \, \text{mV}$ & $42.39 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{2b}$ & $-78.69 \, \text{mV}$ & $-36.66 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{3}$ & $-93.14 \, \text{mV}$ & $-31.85 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{4}$ & $-96.53 \, \text{mV}$ & $-31.85 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{5}$ & $82.2 \, \text{mV}$ & $31.85 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{6}$ & $80.16 \, \text{mV}$ & $31.85 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{7}$ & $81.48 \, \text{mV}$ & $68.42 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{8}$ & $81.49 \, \text{mV}$ & $68.51 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{9a}$ & $87.77 \, \text{mV}$ & $84.92 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{9b}$ & $-156.6 \, \text{mV}$ & $-73.23 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{10}$ & $-156.6 \, \text{mV}$ & $-74.38 \, \mu\text{A}$ \\
+
+        \hline
+
+        $M_{11}$ & $-156.6 \, \text{mV}$ & $-74.24 \, \mu\text{A}$ \\
+
+       
+
+        \bottomrule[1pt]
+
+    \end{tabular}
+
+\end{table}
+
+\newpage
+
+\subsection{Simulação AC}
+
+A simulação AC foi realizada com o objetivo de verificar o GBW do circuito, estando o respetivo diagrama de Bode representado na Figura \ref{fig:Sim_AC}.
+
+Os resultados obtidos encontram-se apresentados na Tabela \ref{tab:ac_results}, 
+onde é possível verificar que todos os objetivos e restrições de projeto foram cumpridos. 
+Importa notar que, embora as frequências do segundo e terceiro polos sejam ligeiramente inferiores ao desejável, a estabilidade do sistema é garantida através de uma margem de fase adequada. 
+Estes parâmetros poderiam ser alvo de uma otimização adicional para maximizar o ganho DC ou o GBW, porém 
+optou-se por manter o dimensionamento atual de modo a respeitar estritamente os requisitos e objetivos estabelecidos na \ref{tab:specs}.
+
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=12cm]{Images/AC_Sim.png}
+    \caption{Diagrama de Bode do circuito}
+    \label{fig:Sim_AC}
+\end{figure}
+
+
+
+\begin{table}[ht]
+    \centering
+    \caption{Resultados obtidos a partir do Maestro no Cadence}
+    \label{tab:ac_results}
+    \vspace{0.2cm}
+    \centering
+    % Alterado de {cc} para {lcc} (Left, Center, Center) para melhor alinhamento
+    \begin{tabular}{lcc} 
+        \toprule[1.2pt]
+        \textbf{Parâmetro} & \textbf{Não Otimizados} & \textbf{Após Otimização} \\
+        \midrule
+        
+        Ganho DC & $62.85 \, \text{dB}$ & $62.89 \, \text{dB}$ \\
+        \hline
+        GBW & $52.44 \, \text{MHz}$ & $58.34 \, \text{MHz}$ \\
+        \hline
+        Margem de Fase & $71^{\circ}$ & $65.42^{\circ}$ \\
+        \hline
+        Output Swing & $704.3 \, \text{mV}$ & $686.1 \, \text{mV}$ \\
+        \hline
+        Potência Consumida & $308.7 \, \mu\text{W}$ & $306.4 \, \mu\text{W}$ \\
+        \hline
+        Excess-Noise Factor & $2.277$ & $2.145$ \\
+        \hline
+        Figure of Merit & $849.4 \, \text{MHz} \cdot \text{pF/mW}$ & $952.11 \, \text{MHz} \cdot \text{pF/mW}$ \\
+        \hline  
+        Área Total & $1045.68 \, \mu\text{$m^2$}$ & $1580.68 \, \mu\text{$m^2$}$ \\
+        \bottomrule[1.2pt]
+    \end{tabular}
+\end{table}
+
+
+\subsection{Layout}
+
+Foi realizado um layout simplificado do circuito, para verificar a área ocupada pelo mesmo.
+Esta foi a última etapa realizada no Cadence e quando começamos, compreendemos imediatamente o porquê de se usar W's pequenos
+e a utilidade dos fingers. Após nos termos apercebido disto, para efetuar o Layout fizemos umas pequenas alterações
+não mudando a veracidade dos resultados. No circuito principal dividimos o valor de W por 10 e colocámos 10 fingers.
+Na figura \ref{fig:LayoutCirc} é apresentado o circuito com esta pequena mudança e na Figura \ref{fig:Layout} está o resultado do layout. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{Images/LayoutCirc.png}
+    \caption{Circuito com algumas alterações nos Fingers e Multiplicadores para o Layout}
+    \label{fig:LayoutCirc}
+\end{figure}
+
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{Images/Layout.png}
+    \caption{Layout simplificado do Circuito Modificado}
+    \label{fig:Layout}
+\end{figure}
+
+
+Isto perfaz uma área total de implementação física de aproximadamente $40593\ \mu m^2$. 
+Comparando este valor com a Tabela \ref{tab:ac_results}, observa-se que a área de layout é significativamente 
+superior. Esta diferença é esperada, pois o layout (obtido através de placement semi-automático) contempla não apenas 
+a área ativa dos transístores, mas também os espaçamentos obrigatórios pelas regras de desenho (DRC), 
+anéis de guarda, contactos e o espaço reservado para as interligações metálicas.
+
+\newpage
+
+\subsection{Comparação com o Folded-Cascode OTA}
+
+Com os resultados obtidos para o CFC OTA, torna-se pertinente efetuar uma comparação da sua Figura de Mérito (FoM) com a do \textit{Folded-Cascode} OTA, cuja topologia se encontra representada na Figura \ref{fig:Cascode} e que foi analisado no trabalho laboratorial anterior.
+
+Para além das evidentes diferenças entre as duas topologias, destaca-se a diferença da capacidade de carga ($C_{load}$) imposta, esta era de $8\,\text{pF}$. 
+Esta carga capacitiva elevada obrigou, na altura, a um aumento substancial da corrente de polarização para garantir a estabilidade e a largura de banda exigidas. 
+
+Olhando apenas em termos de corrente, apesar da corrente $I_b$ do CFC ser menor, o consumo de potência vai ser muito maior, devido à quantidade de transistores que o CFC tem.
+Todas as vantagens do CFC referidas na Introdução levam a uma desvantagem, o folded cascode é mais eficiente energeticamente, levando a um maior FoM.
+
+
+\newpage

@@ -4,7 +4,7 @@
 % and colors
 % ----------------------------------------------------------------------
 \usepackage[utf8]{inputenc} % Codification
-\usepackage[english]{babel} % Writing idiom
+\usepackage[portuguese]{babel} % <--- CORRIGIDO: "portuguese" com 'e' no fim
 
 \usepackage[export]{adjustbox} % Align images
 \usepackage{amsmath} %a Extra commands for math mode
@@ -26,9 +26,9 @@
     \fancyhead[L]{
         \includegraphics[scale = 0.45]{Images/NovaFctHor.png}
     } % Left of Head note
-    \fancyhead[R]{\footnotesize Nanocircuits and Analog Systems} % Right of Head note
+    \fancyhead[R]{\footnotesize Nanocircuitos e Sistemas Analógicos} % Right of Head note
     \fancyfoot[R]{\thepage  } % Center of Footnote
-    %\fancyfoot[R]{\footnotesize Degree} % Right of Footnote
+    % \fancyfoot[R]{\footnotesize Degree} % Right of Footnote
     \renewcommand{\footrulewidth}{0.4pt} % Footnote rule
 \usepackage{float} % Utilization of [H] in figures
 \usepackage{graphicx} % Figures in LaTeX
@@ -41,7 +41,7 @@
     \titleformat{\section}{\Large\bfseries}{\thesection}{1em}{}
     \titleformat{\subsection}{\large\bfseries}{\thesubsection}{1em}{}
     \titleformat{\subsubsection}{\normalsize\bfseries}{\thesubsubsection}{1em}{}
-    %\fancyfoot[C]{\thepage}
+    % \fancyfoot[C]{\thepage}
 
 %code
 \usepackage[breakable]{tcolorbox}
@@ -108,7 +108,15 @@
 % New and re-newcommands
 \newcommand{\sen}{\operatorname{\sen}} % Sine function definition
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % Specific rule definition
-\renewcommand{\appendixpagename}{\LARGE Appendices}
+
+% --- BLOCO DE TRADUÇÃO CORRIGIDO ---
+\addto\captionsportuguese{
+  \renewcommand{\contentsname}{Índice}
+  \renewcommand{\listfigurename}{Lista de Figuras}
+  \renewcommand{\listtablename}{Lista de Tabelas}
+  \renewcommand{\appendixpagename}{Anexos}
+}
+% -----------------------------------
 
 % Colors
 
@@ -129,10 +137,9 @@
         \vspace{-1.0cm}
         \includegraphics[scale = 0.06, left]{Images/NovaFctVer.png} % Nova logo
     \end{figure}
-
     \mbox{}\\[2.0cm]
     \textsc{\Huge MEEC}\\[2cm]
-    \textsc{\LARGE Nanocircuits and Analog Systems}\\[2.0cm]
+    \textsc{\LARGE Nanocircuitos e Sistemas Analógicos}\\[1.5cm]
     \HRule\\[0.4cm]
     {\large \bf {Design, optimization and simulation of a complementary folded-cascode (CFC) amplifier in 65-nm Bulk-CMOS
 }}\\[0.2cm] % [\texttt{EN}]
@@ -192,11 +199,16 @@
 \subfile{Sections/Introdução.tex}
 \subfile{Sections/AnaliseTeorica.tex}
 \subfile{Sections/Dimensionamento.tex}
-\subfile{Sections/Simualção.tex}
+\subfile{Sections/Simulação.tex} 
+\subfile{Sections/Conclusao.tex}
 
 
 
-%\newpage
-%\bibliography{references}
+\newpage
+
+\bibliography{Refes}
+
+\newpage
+\nocite{*}               % 1. Obriga a mostrar todas as referências
 
 \end{document}

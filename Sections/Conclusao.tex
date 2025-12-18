@@ -1,3 +1,25 @@
-\section{Resultados Analíse e Conclusão}
+\section{Análise de Resultados e Conclusão}
+
+Nesta secção, iremos analisar os resultados obtidos na simulação do OTA, comparando com valores teóricos e apontar alguns pontos de melhoria futuros. 
+
+Começando por analisar os resultados obtidos no script python com os valores simulados antes da otimização, verificamos que o dimensionamento foi efetuado corretamente, 
+mas que  devido a uso de valores ideais, alguns valores para os tamanhos dos transistores fugiram um pouco do que era esperado. Após ter sido efetuada a otimização e falando agora
+desses resultados, é possível ver que os valores continuam a rondar muito perto dos valores do python, justificando a fidelidade dos resultados obtidos no script.
+
+Passando para a simulação DC, os resultados também eram os esperados e obtivemos valores de $V_{dsats}$ e de $I_D$ muito próximos dos definidos no python o que considerámos
+um resultado muito bom, estando cada vez mais perto do valor teórico e mais perto dos objetivos definidos anteriormente.   
+
+Os resultados da simulação AC, dão-nos a confirmação de que todo o dimensionamento para trás foi bem efetuado, onde foi garantido a margem de fase mínima de $60^\circ$, obtendo um 
+valor de 2º polo bastante longe do polo dominante garantido assim uma boa estabilidade.
+Na Tabela \ref{tab:ac_results}, é possível ver o resultado obtido para os parâmetros definidos anteriormente e a comparação com os valores que tinham sido obtidos antes das iterações, 
+esta que tornou possível entender a importância de otimizar os valores e verificar se todos os transistores estão a funcionar no ponto ideal, obtendo melhores valores em todos os parâmetros
+com destaque à figura de mérito. Os resultados finais revelam-se novamente valores de sucesso, cumprindo os objetivos do trabalho. 
+
+Por fim, analisando o Layout do circuito, percebemos a importância dos fingers. A sua utilização revelou-se obrigatória, pois aumentar o número de fingers permitiu-nos 
+dividir transístores de grandes dimensões em múltiplos segmentos menores, conseguindo chegar à Figura \ref{fig:Layout}.
+
+Os objetivos deste trabalho foram cumpridos com sucesso, onde conseguímos fazer o design, otimizar e simular um amplificador CFC OTA.
+
+
 
 

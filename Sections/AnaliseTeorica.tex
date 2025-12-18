@@ -4,11 +4,10 @@ Nesta secção, vão ser mostradas todas as etapas da análise teórica para o c
 operational transconductance amplifier (OTA). O objetivo com esta análise é determinar os valores dos diferentes parâmetros, 
 as respetivas demonstrações para efeitos de otimização, conseguindo assim cumprir os objetivos que foram definidos na tabela \ref{tab:specs}.
 
-Para analisar teóricamente o CFC OTA, usámos como recurso uma montagem que já nos era conhecida o convencional amplificador Folded Cascode, mostrado
+Para analisar teoricamente o CFC OTA, usámos como recurso uma montagem que já nos era conhecida, o convencional amplificador Folded Cascode, mostrado
 na Figura \ref{fig:Cascode}, o CFC parte da mesma topologia, mas tem algumas modificações levando a grandes melhorias.
 
-\textcolor{red}{Explicaçãozinha sobre as melhorias do CFC para o normal}
-
+O CFC cascode tem a grande vantagem de ter uma faixa de entrada Rail-to-Rail, e ainda é possível obter o dobro do ganho. 
 
 \begin{figure}[htp]
     \centering
@@ -36,7 +35,7 @@ devido à sua simetria, o circuito é possível ser visto na Figura \ref{fig:Cir
         \label{fig:SimplificadoMaximo}
     \end{subfigure}
     
-    \caption{Simplificação realizada para efeitos de simplificação na Análise Teórica}
+    \caption{Simplificação realizada para facilitar a Análise Teórica}
     \label{fig:circuitos_completos}
 \end{figure}
 
@@ -44,7 +43,7 @@ devido à sua simetria, o circuito é possível ser visto na Figura \ref{fig:Cir
 
 Na Figura \ref{fig:SimplificadoMaximo} está representado o circuito simplificado, este que foi escolhido devido a ter 
 o nó de saída, ficando mais simples de retirar os parâmetros e de analisar o circuito. 
-Nas subsecções abaixo constaram as explicações de como foram retiradas as expressões e os valores que foram meencionados ao longo 
+Nas subsecções abaixo constaram as explicações de como foram retiradas as expressões e os valores que foram mencionados ao longo 
 do relatório.
 
 
@@ -52,7 +51,7 @@ do relatório.
 
 \subsection{Ganho DC}
 
-Tal como foi estudado o ganho DC $A_v$ é obtido pelo produto da transcondutância de curto circuito $G_M$ e
+Tal como foi estudado o ganho DC $A_v$ é obtido pelo produto da transcondutância de curto-circuito $G_M$ e
 a resistência de saída $R_{out}$.
 
 \begin{align}
@@ -149,21 +148,33 @@ consiste em averiguar todas as capacidades ligadas a esse nó, essas capacidades
 Dito isto, pela análise do circuito acima, obtivémos a seguinte expressão para $C_{out}$ está representada na Equação \ref{eq:Cout}:
 
 \begin{align}
-    C_{out} = C_{gd4P} + C_{db4P} + C_{gd6N} + C_{db6N} \,[F]
+    C_{out} = C_{gd4P} + C_{db4P} + C_{gd6N} + C_{db6N} + C_{Load}\,[F]
     \label{eq:Cout}
 \end{align}
 
 
 \subsection{Frequências do segundo e terceiro polos}
 
-\textcolor{red}{Uma explicação melhorzinha sobre como descobrimos os polos 2 e 3}
 
 As frequências do segundo e terceiro polos do circuito são obtidas através da análise
-dos nós internos do circuito, mais concretamente, os nós que correspondem às fontes, como é possível ver na Figura \ref{fig:SimplificadoMaximo} está legendado onde estão localizados estes dois polos,
+dos nós internos do circuito, mais concretamente, os nós que correspondem às fontes, como é possível ver na Figura \ref{fig:SimplificadoMaximo} está desenhado onde estão localizados estes dois polos,
 estes que se encontram ligados aos transistores M4 e M6, respetivamente. A sua determinação é importante para garantir a estabilidade do
 circuito em malha fechada.
+Para entender qual dos nós tem a frequência mais baixa, correspondente ao 2º polo,
+analisámos o circuito e vimos que o transistor $M_4$ é um PMOS tendo uma maior transcondutância e $M_6$ um NMOS tendo menor transcondutância, após desenvolver
+as equações \ref{eq:fp2}, \ref{eq:fp3} e \ref{eq:Rp2} \ref{eq:Rp3} abaixo no papel, foi fácil de notar que o segundo polo está associado ao nó do transistor $M_4$
+e o terceiro polo associado ao nó do transistor $M_6$, na Figura \ref{fig:polos} é possível ver as capacidades parasitas ligadas a cada nó, onde após este desenho foi possível retirar as expressões abaixo.
 
-As expressões para as frequências dos segundos e terceiros polos são dadas por:
+
+\begin{figure}[htp]
+    \centering
+    \includegraphics[width=6.5cm]{Images/Polo2_Polo3.png}
+    \caption{Esquemático para facilitar o cálculo das capacidades}
+    \label{fig:polos}
+\end{figure}
+
+
+As expressões para as frequências do segundo e terceiro polo são dadas por:
 
 \begin{align}
     F_{p2} = \dfrac{1}{2\pi \times R_{p2} \times C_{p2}} \, [Hz]
@@ -207,15 +218,14 @@ Nas equações \ref{eq:Rp2} e \ref{eq:Rp3}, o fator $(2-BE)$ justifica-se pela p
 Como estes transístores estão na configuração de common-gate, o efeito de corpo influencia, aumentando a transcondutância dos mesmos.
  Matematicamente, isto reflete-se no denominador da equação, resultando num valor de resistência menor do que seria num transístor ideal sem este efeito.
 
-\textcolor{red}{Imagens aqui também?? Desenho Amanhã que tou com perguiça já apanhei rage bait com a de cima}
 
 
 
-\subsection{OutPut Swing (OS)}
+\subsection{Output Swing (OS)}
 
 O output swing (OS) do circuito determina a gama de tensões que o circuito pode 
 assumir na sua saída, sem que os transístores saíam da região de saturação. 
-Este parâmetro do circuitot tem em conta as quedas de tensão 
+Este parâmetro do circuito tem em conta as quedas de tensão 
 necessárias para garantir que os transístores de saída operam 
 na zona de inversão moderada, como também a margem de operação, que neste caso é 
 de \SI{80}{\milli\volt}.
@@ -227,17 +237,17 @@ A expressão para o output swing do amplificador é dada por:
 \end{align}
 
 
-\subsection{Fator de excesso de rúido}
-O fator de excesso de rúido (ENF) do circuito é um parâmetro que
-indica o excesso de rúido criado por um amplificador de ganho $A_{v}$.
+\subsection{Fator de excesso de ruído}
+O fator de excesso de ruído (ENF) do circuito é um parâmetro que
+indica o excesso de ruído criado por um amplificador de ganho $A_{v}$.
 Um amplificador com ENF igual a 1 significa que o mesmo não acrescenta 
-nenhum ruído ao sinal, ou seja, o rúido na saída não tem nenhuma contribuição
-relativa ao rúido gerado pelo próprio amplificador.
+nenhum ruído ao sinal, ou seja, o ruído na saída não tem nenhuma contribuição
+relativa ao ruído gerado pelo próprio amplificador.
 Qualquer valor de ENF superior a 1 indica que o amplificador acrescenta
-rúido ao sinal, que é o caso que se verifica na realidade.
+ruído ao sinal, que é o caso que se verifica na realidade.
 
-O fator de rúido foi estudado para metade do circuito do CFC OTA, 
-tendo em conta que foi ralizada uma amproximaçaõ e não foram contabilizados os excessos de ruído dos transistores em configuração de Cascode. 
+O fator de ruído foi estudado para metade do circuito do CFC OTA, 
+tendo em conta que foi realizada uma aproximação e não foram contabilizados os excessos de ruído dos transistores em configuração de Cascode. 
 A expressão obtida para o ENF é a seguinte:
 
 \begin{align}

@@ -4,10 +4,10 @@
 O processo de dimensionamento do circuito consiste em, com base 
 nos resultados obtidos da análise teórica, optimizar os parâmetros de interesse
 de modo a cumprir os requisitos especificados, tendo sempre em conta restrições impostas.
-De acordo a análise teórica, foi desenvolvido um script 
+De acordo a análise, foi desenvolvido um script 
 em \textit{Python} que permite não só calcular os parâmetros de interesse do circuito
 em função das características dos diversos transístores, como também 
-calculcar a razão de tamanho de cada transístor.
+calcular a razão de tamanho de cada transístor.
 
 Começou-se por definir para cada transístor a sua tensão de saturação como também o seu 
 comprimento. Nesta fase inicial, considerou-se para todos os transístores um comprimento
@@ -26,7 +26,7 @@ a conclusão pode ser vista na Tabela \ref{tab:gainParameters} \newline\newline
 \begin{table}[h!]
     \centering
     % --- ESTA LINHA É QUE FAZ APARECER NO ÍNDICE ---
-    \caption{características dos Transístores que afetam o ganho DC} 
+    \caption{Características dos Transístores que afetam o ganho DC} 
     \label{tab:gainParameters} 
     % -----------------------------------------------
     \vspace{0.2cm}
@@ -74,7 +74,7 @@ Nesta mesma figura, podemos averiguar a importância das duas características d
 diversos transístores no ganho DC do circuito.
 
 \subsection{Análise do produto do Ganho com Largura de banda (GBW)}
-Para o GBW, neste projeto foi nos requisitado um valor aproximado de 50Mhz.
+Para o GBW, neste projeto foi-nos requisitado um valor aproximado de 50Mhz.
 Tal como no ganho DC, aqui também foi necessário averiguar quais os transístores
 que influenciam este parâmetro. 
 
@@ -120,7 +120,6 @@ uma melhor perspectiva para o dimensionamento dos componentes do circuito.
     \label{fig:GBWGraph}
 \end{figure}
 
-\newpage
 Na figura~\ref{fig:GBWGraph} podemos observar 
 a relação do GBW com a tensão de saturação e com o comprimento dos transístores.
 
@@ -171,7 +170,7 @@ que existe uma relação direta entre o output swing e a tensão de saturação 
 transístores mencionados.
 
 
-\subsection{Análise do Fator de excesso de rúido}
+\subsection{Análise do Fator de excesso de ruído}
 O fator de excesso de rúido (ENF) do circuito é 
 um parâmetro que encontra-se afetado pelos valores de $V_{DS,sat}$ dos 
 transístores $M_{2aN}$, $M_{2bP}$, $M_{8N}$ e $M_{11P}$.
@@ -182,7 +181,7 @@ desses transistores já mencionados.
 \begin{figure}[htp]
     \centering
     \includegraphics[width=15cm]{Images/NFGraph.png}
-    \caption{Fator de excesso de rúido em função de $V_{DSsat}$}
+    \caption{Fator de excesso de ruído em função de $V_{DSsat}$}
     \label{fig:NFGraph}
 \end{figure}
 
@@ -193,7 +192,7 @@ Pela equação~\ref{eq:Pdissipada}, a corrente de Bias é o único parâmetro qu
 variável de forma a influenciar a potência dissipada no circuito.
 
 No caso, numa primeira fase do dimensionamento, considerou-se um valor de $I_{B} = \SI{100}{\micro\ampere}$. 
-Numa fase posterior, viu-se a necessidade de reduzir este valor para $I_{B} = \SI{75}{\micro\ampere}$, de forma
+Numa fase posterior, viu-se a necessidade de reduzir este valor para $I_{B} = \SI{80}{\micro\ampere}$, de forma
 a melhorar outros parâmetros, como o GBW, dependentes desta corrente.
 
 
@@ -262,9 +261,9 @@ De notar que, para o circuito Bias, considerou-se uma corrente
 10 vezes menor que a corrente de Bias do CFC OTA, ou seja, $I_{Bias} = \frac{I_{B}}{10}$.
 
 Após a análise de todos os parâmetros de interesse do circuito e com o
-auxílio do script desenvolvido em \textit{Python}, 
+auxílio do script desenvolvido em \textit{Python},  
 chegámos a um dimensionamento final para o circuito, 
-na qual se encontra na tabela~\ref{tab:finalSizing}. 
+na qual se encontra na tabela~\ref{tab:finalSizing}. Os valores definidos abaixo foram obtidos através da escolha de uma corrente de $I_b = 80 \text{$\mu$A}$
 
 
 \begin{table}[h!]
